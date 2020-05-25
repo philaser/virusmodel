@@ -57,9 +57,8 @@ class Graph:
             self.nodes.update({str(node.id) : node})
 
 
-    def infect(self, node_id, rate):
-        node = self.nodes[node_id]
-        node_a_id, node_b_id = node.traverse()
+    def infect(self, traversal, rate):
+        node_a_id, node_b_id = traversal
         node_a = self.nodes[node_a_id]
         node_b = self.nodes[node_b_id]
         rate = float(rate)
@@ -90,15 +89,23 @@ class Graph:
     
 
     def simulate(self, initial_infections, infection_rate, number_of_days):
+        
         infected_nodes = random.sample(list(self.nodes), k = initial_infections)
         
         for node in infected_nodes:
             self.nodes[node].status = 'infected'
 
         for i in range(number_of_days):
+            traversals = []
             print('Day {}'.format(i + 1))
-            for key in self.nodes.keys():
-                self.infect(key, infection_rate)
+            
+            for key, node in self.nodes.items():
+                traversals.append(node.traverse())
+            
+            for traversal in traversals:
+                self.infect(traversal, infection_rate)
+
+
             self.updateNodeCount()
             print('Number of normal cases: {}'.format(self.num_normal_nodes))
             print('Number of infected cases: {}'.format(self.num_infected_nodes))
