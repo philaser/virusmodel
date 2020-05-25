@@ -27,7 +27,8 @@ class Node:
         
 
     def updateDaysInfected(self):
-        pass
+        if self.status == 'infected':
+            self.days_infected = self.days_infected + 1
 
 
 
@@ -66,8 +67,8 @@ class Graph:
         choice = random.choices(['infected', 'normal'], distribution)
 
         # print(node_a.status, node_b.status)
-
-        if node_a.status == 'infected' or node_b.status == 'infected':
+    
+        if node_a.status == 'infected' and node_a.status != 'dead' or node_b.status == 'infected' and node_b.status != 'dead':
 
             if choice[0] == 'infected':
                 node_a.status = choice[0]
@@ -95,6 +96,7 @@ class Graph:
         for node in infected_nodes:
             self.nodes[node].status = 'infected'
 
+
         for i in range(number_of_days):
             traversals = []
             print('Day {}'.format(i + 1))
@@ -105,6 +107,11 @@ class Graph:
             for traversal in traversals:
                 self.infect(traversal, infection_rate)
 
+# this code may need to be refactored, i dont like the way it's mutating Node properties like that
+            for node in self.nodes.values():
+                node.updateDaysInfected()
+                if node.days_infected >= 7:
+                    node.status = 'dead'
 
             self.updateNodeCount()
             print('Number of normal cases: {}'.format(self.num_normal_nodes))
