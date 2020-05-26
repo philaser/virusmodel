@@ -39,6 +39,7 @@ class Graph:
         self.num_normal_nodes = 0
         self.num_infected_nodes = 0
         self.num_dead_nodes = 0
+        self.interventions = []
 
 
     def createLinks(self):
@@ -89,6 +90,11 @@ class Graph:
                 self.num_dead_nodes =  self.num_dead_nodes + 1
     
 
+    def addIntervention(self, infection_rate, day_of_intervention):
+
+        self.interventions.append([infection_rate, day_of_intervention])
+
+
     def simulate(self, initial_infections, infection_rate, number_of_days):
         
         infected_nodes = random.sample(list(self.nodes), k = initial_infections)
@@ -98,6 +104,14 @@ class Graph:
 
 
         for i in range(number_of_days):
+
+            if self.interventions != []:
+                for intervention in self.interventions:
+                    if intervention[1] == i:
+                        infection_rate = intervention[0]
+                        print('infection rate changed to {}'.format(infection_rate))
+
+
             traversals = []
             print('Day {}'.format(i + 1))
             
