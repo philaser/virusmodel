@@ -21,7 +21,7 @@ Virusmodel has three primary goals
 
 ### Installation
 
-Dillinger requires Python 3 to run.
+Virusmodel requires Python 3 to run.
 
 To install, simply use the command below
 
@@ -33,27 +33,11 @@ $ pip install virus_model
 
 ### Development
 
-Want to contribute? Great!
+Want to contribute?
 
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantaneously see your updates!
+unfortunately, virusmodel is not open to contributions at the moment. A solid codebase must be developed first.
+However that does not prevent you from forking it and trying to improve it on your own way! 
 
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
-```
-
-Second Tab:
-```sh
-$ gulp watch
-```
-
-(optional) Third:
-```sh
-$ karma test
-```
 #### How to use
 Currently, virusmodel has limited functionality. Simulations can however be carried out on any population size.
 Simulations can also be carried out using any infection rate
