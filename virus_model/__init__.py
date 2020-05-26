@@ -1,0 +1,1 @@
+from virus_model.virusmodel import Graph
