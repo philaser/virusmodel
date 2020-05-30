@@ -1,10 +1,11 @@
-""" virusmodel simulation v0.1
+""" virusmodel simulation v0.2
     Philemon Johnson
     !!! WORK IN PROGRESS. DO NOT DISTRIBUTE!!!
 """
 import random
 import uuid
 from inspect import stack
+import pandas as pd
 
 
 class Node:
@@ -40,6 +41,7 @@ class Graph:
         self.num_infected_nodes = 0
         self.num_dead_nodes = 0
         self.interventions = []
+        self.data = pd.DataFrame(columns = ['Day', 'Normal', 'Infected', 'Dead'])
 
 
     def createLinks(self):
@@ -90,15 +92,15 @@ class Graph:
                 self.num_dead_nodes =  self.num_dead_nodes + 1
     
 
-    def addIntervention(self, infection_rate, day_of_intervention, duration, name):
-
+    def addIntervention(self, infection_rate, day_of_intervention, name, duration = None):
         self.interventions.append([infection_rate, day_of_intervention, name, duration])
 
 
     def simulate(self, initial_infections, infection_rate, number_of_days):
-        
         infected_nodes = random.sample(list(self.nodes), k = initial_infections)
         original_rate = infection_rate
+        data_list = []
+        
         
         for node in infected_nodes:
             self.nodes[node].status = 'infected'
@@ -129,8 +131,11 @@ class Graph:
                     node.status = 'dead'
 
             self.updateNodeCount()
+            day_dict = {'Day' : i+1, 'Normal' : self.num_normal_nodes, 'Infected' : self.num_infected_nodes, 'Dead' : self.num_dead_nodes}
+            data_list.append(day_dict)
             print('Number of normal cases: {}'.format(self.num_normal_nodes))
             print('Number of infected cases: {}'.format(self.num_infected_nodes))
             print('Number of deceased: {}'.format(self.num_dead_nodes))
             print("______________________________________\n")
 
+        self.data = pd.DataFrame(data_list)
