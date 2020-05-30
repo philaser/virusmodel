@@ -92,8 +92,8 @@ class Graph:
                 self.num_dead_nodes =  self.num_dead_nodes + 1
     
 
-    def addIntervention(self, infection_rate, day_of_intervention, name, duration = None):
-        self.interventions.append([infection_rate, day_of_intervention, name, duration])
+    def addIntervention(self, infection_rate, start_day, name, end_day = None):
+        self.interventions.append([infection_rate, start_day, name, end_day])
 
 
     def simulate(self, initial_infections, infection_rate, number_of_days):
@@ -113,7 +113,9 @@ class Graph:
                     if intervention[1] == i + 1:
                         infection_rate = intervention[0]
                         print('{} intervention introduced. Infection rate changed to {}'.format(intervention[2],infection_rate))
-
+                    if intervention[3] == i+1:
+                        infection_rate = original_rate
+                        print('{} intervention ended. Infection rate changed to {}'.format(intervention[2],infection_rate))
 
             traversals = []
             print('Day {}'.format(i + 1))

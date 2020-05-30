@@ -15,6 +15,8 @@ Virusmodel has three primary goals
 
   - Generate a community of randomly linked nodes
   - Simulate virus spread within a custom number of days using a user defined infection rate
+  - Simlate the introdution of interventions to alter infection rate
+  - graph for analysing disease spread
 
 
 
@@ -64,6 +66,14 @@ Simulation is done with the simulate method. this method takes 3 arguments:
 community.simulate(1, 0.7, 100)
 ```
 
+With the release of v0.2, the ability to add interventions has been added. Interventions are used to alter the infection rate during the time duration of the simulation. 
+
+To add interventions, simply call the addIntervention method and state the new infection rate, the day the intervention starts, the name of the intervention and the day the intervention ends as arguments
+```python
+community.addIntervention(0.0, 2, 'lockdown',7)
+```
+
+
 The output is then printed to the console showing day-by-day statistics.
 
 
@@ -71,9 +81,9 @@ The output is then printed to the console showing day-by-day statistics.
 
  - 	~~Add deaths~~
  - Add proper exception handling
- - add extra documentation/comments
- - add the ability to place interventions
- - Add Analytics!
+ - Add extra documentation/comments
+ - ~~Add the ability to place interventions~~
+ - ~~Add Analytics!~~
  - Add Tests as the codebase becomes larger
 
 License

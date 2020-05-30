@@ -10,7 +10,6 @@ class LinePlot:
         self.ax = None
 
     def plot(self):
-        print(self.dataframe)
         self.ax = sns.lineplot(x = 'Day', y = 'Infected', data = self.dataframe)
         plt.show()
 

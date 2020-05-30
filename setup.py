@@ -11,10 +11,10 @@ setup(
   download_url = 'https://github.com/philaser/virusmodel/archive/v_02.tar.gz',    # I explain this later on
   keywords = ['Virus', 'simulation', 'disease', 'covid-19', 'coronavirus'],   # Keywords that define your package best
   install_requires=[            # I get to this in a second
-    numpy,
-    pandas,
-    matplotlib,
-    seaborn
+    'numpy',
+    'pandas',
+    'matplotlib',
+    'seaborn'
 
 ],
   classifiers=[
